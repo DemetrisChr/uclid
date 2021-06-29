@@ -810,5 +810,32 @@ class ParserSpec extends AnyFlatSpec {
         assert (p.errors.exists(p => p._1.contains("Macro does not exist")))
     }
   }
+  "test-macro-nested.ucl" should "not parse successfully" in {
+    try {
+      val fileModules = UclidMain.compile(ConfigCons.createConfig("test/test-macro-nested.ucl"), lang.Identifier("main"))
+      assert (false)
+    } catch {
+      case p : Utils.ParserErrorList =>
+        assert (p.errors.exists(p => p._1.contains("Nested block statements are not allowed in a sequential environment")))
+    }
+  }
+  "test-macro-next-block.ucl" should "not parse successfully" in {
+    try {
+      val fileModules = UclidMain.compile(ConfigCons.createConfig("test/test-macro-next-block.ucl"), lang.Identifier("main"))
+      assert (false)
+    } catch {
+      case p : Utils.ParserErrorList =>
+        assert (p.errors.exists(p => p._1.contains("Nested block statements are not allowed in a sequential environment")))
+    }
+  }
+  "test-macro-primed.ucl" should "not parse successfully" in {
+    try {
+      val fileModules = UclidMain.compile(ConfigCons.createConfig("test/test-macro-primed.ucl"), lang.Identifier("main"))
+      assert (false)
+    } catch {
+      case p : Utils.ParserErrorList =>
+        assert (p.errors.exists(p => p._1.contains("Unknown variable in LHS")))
+    }
+  }
 
 }

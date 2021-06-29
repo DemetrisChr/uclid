@@ -1,0 +1,23 @@
+module main {
+    var a, b : integer;
+
+    macro fib_next {
+        a', b' = b, a + b;
+    }
+
+    init {
+        a = 0;
+        b = 1;
+    }
+    next {
+        fib_next;
+    }
+
+    invariant a_le_b: a <= b;
+  
+    control {
+      unroll (3);
+      check;
+      print_results;
+    }
+}
